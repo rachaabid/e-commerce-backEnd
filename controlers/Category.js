@@ -45,7 +45,7 @@ exports.update = async (req, res) => {
   }
 }
 
-exports.delete = async (req, res)=>{
+exports.deleteCategory = async (req, res)=>{
   try {
     const category = await Category.findByIdAndRemove(req.params.idCategory);
     category.products.map(async (id)=>{

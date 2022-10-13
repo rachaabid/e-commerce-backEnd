@@ -45,7 +45,7 @@ exports.update = async (req, res)=>{
   }
 }
 
-exports.delete = async (req, res)=>{
+exports.deleteCustomer = async (req, res)=>{
   try {
     await Customer.findByIdAndRemove(req.params.idCustomer);
     res.send({message: 'Customer deleted'})

@@ -13,6 +13,16 @@ app.use(morgan('dev'));
 require('./db/connect');
 require('dotenv').config();
 
+const customerAPI = require('./routes/customerAPI');
+const productAPI = require('./routes/productAPI');
+const categoryAPI = require('./routes/categoryAPI');
+const commandeAPI = require('./routes/commandeAPI');
+
+app.use('/api/v1', customerAPI);
+app.use('/api/v1', productAPI);
+app.use('/api/v1', categoryAPI);
+app.use('/api/v1', commandeAPI);
+
 app.listen(process.env.port || 3000, function(){
   console.log('now listening for requests');
 })

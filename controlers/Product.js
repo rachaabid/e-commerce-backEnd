@@ -64,7 +64,7 @@ exports.update = async (req, res)=>{
   }
 }
 
-exports.delete = async (req, res)=>{
+exports.deleteProduct = async (req, res)=>{
   try {
     await Category.findByIdAndUpdate(req.body.category, {$pull: {products: req.params.idProduct}}, {new: true});
     await Product.findByIdAndRemove(req.params.idProduct);
