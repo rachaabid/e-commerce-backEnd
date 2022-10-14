@@ -73,10 +73,46 @@ exports.forgetPassword = async (re, res)=>{
 
    const link = `${process.env.url}#/resetPassword/${resetToken}/${userFound._id} `;
 
-   await sendEmail(req.body.email, "Password Reset Request", {})
+   await sendEmail(req.body.email, "Password Reset Request", {firstName: userFound.firstName, link: link,}, "../template/forgetPassword.html")
+   res.json({message: 'Email sent'})
   } catch (error) {
     res.status(500).json({
       message: error.message || 'some error occured'
     });   
+  }
+}
+
+exports.resetPassword = async (req, res)=>{
+  try {
+    const passwordResetToken = await Token.findOne({token: req.params.resetToken});
+    if(!passwordResetToken){
+     res.status(400).json('Invalid or expired password reset token'); 
+    }
+    const dateNow = new Date();
+    const tokenDate = new Date(passwordResetToken.createdAt);
+    const diff = dateNow - tokenDate;
+    const seconds = Math.floor(diff / 1000);
+
+    if (seconds > 900) {
+      res.status(400).json('Invalid or expired password reset token');
+    }
+    let salt = await bcrypt.genSalt(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+
+    await User.updateOne(
+      {_id: passwordResetToken.userId},
+      {$set: {password: hash}},
+      {new: true}
+    );
+    const user = await User.findById(passwordResetToken.userId);
+    await sendEmail(user.email, "Password Reset Successfully", 
+    {firstName: user.firstName,}, "../template/resetPassword.html");
+    await passwordResetToken.deleteOne();
+    res.json({message: 'Password reset'});
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || 'some error occured'
+    }); 
   }
 }
