@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>order Confirmation</title>
+  <style>
+    div{
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      color: white;
+      font-size: large;
+    }
+    h1 {
+      color: brown;
+      text-decoration: underline;
+    }
+ 
+    img {
+      width: 500px;
+      height: 250px;
+    }
+
+    table{
+      border: beige;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+    <p>Dear <%=customer%>,
+        Thank you for your purchases!
+        your order has been successfully confirmed.
+        It will be packaged and shipped as soon as possible.
+    </p>
+
+    <h1>Personal Information</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Customer:
+          </th>
+          <th>
+            Phone Number:
+          </th>
+          <th>
+            Adress:
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%=customer%>
+          </td>
+          <td>
+            <%=phoneNumber%>
+          </td>
+          <td>
+            <%=adress%>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>Your order for:</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Products:
+          </th>
+          <th>
+            Total Selling Price:
+          </th>
+          <th>
+            Payment Method:
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%=listPriducts%>
+          </td>
+          <td>
+            <%=totalSellingPrice%>
+          </td>
+          <td>
+            <%=paymentMethod%>
+          </td>
+        </tr>
+      </tbody>
+
+  </div>
+</body>
+
+</html>
