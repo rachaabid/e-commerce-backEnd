@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const { createOrderConfirmation } = require('../Controlers/orderConfirmation');
+const { createCommandeConfirmation } = require('../Controlers/commandeConfirmation');
 
-router.post('/orderConfirmation/:idProduct',  
+router.post('/commandeConfirmation/:idProduct',  
  passport.authenticate('bearer', {session: false}),
- createOrderConfirmation);
+ createCommandeConfirmation);
 
  
 module.exports = router;

@@ -16,7 +16,7 @@ router.get('/Commandes/:idCommande',
 passport.authenticate('bearer', { session: false }), 
 getCommandeById);
 
-router.put('/Commandes/:idCommande',
+router.put('/Commandes/:idCommande/:idProduct',
 passport.authenticate('bearer', { session: false }), 
 pullById);
 

@@ -6,7 +6,7 @@ const path = require('path');
 const ejs = require('ejs');
 const nodemailer = require('nodemailer');
 
-exports.createOrderConfirmation = async(req, res)=>{
+exports.createCommandeConfirmation = async(req, res)=>{
   try {
     const product = await Product.findById(req.params.idProduct);
     if (product.quantite !== 0){

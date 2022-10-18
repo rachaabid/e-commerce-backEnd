@@ -71,7 +71,7 @@ exports.forgetPassword = async (re, res)=>{
     token: resetToken
    }).save();
 
-   const link = `${process.env.url}#/resetPassword/${resetToken}/${userFound._id} `;
+   const link = `${process.env.url}#/resetPassword/${resetToken}`;
 
    await sendEmail(req.body.email, "Password Reset Request", {firstName: userFound.firstName, link: link,}, "../template/forgetPassword.html")
    res.json({message: 'Email sent'})
