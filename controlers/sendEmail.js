@@ -3,6 +3,7 @@ const path = require('path');
 const fs  = require('fs');
 const handlebars = require('handlebars');
 
+
 exports.sendEmail = async(email, subject, payload, template)=>{
   try {
     const transporter = nodemailer.createTransport({

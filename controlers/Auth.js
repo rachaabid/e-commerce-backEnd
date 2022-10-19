@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const randomString = require('randomstring');
 const Token = require('../models/token');
+const { sendEmail } = require('./sendEmail');
 
 
 exports.signup = async (req, res)=>{
@@ -40,7 +41,7 @@ exports.signin = async (req, res)=>{
           userId: userFound._id, role: userFound.role
         },
         process.env.SECRET_KEY,
-        { expiresIn: 900 }
+        { expiresIn: '1d' }
       )
     })
   } catch (error) {
@@ -51,7 +52,7 @@ exports.signin = async (req, res)=>{
 }
 
 
-exports.forgetPassword = async (re, res)=>{
+exports.forgetPassword = async (req, res)=>{
   try {
    const userFound = await User.findOne({
     email: req.body.email
@@ -116,3 +117,9 @@ exports.resetPassword = async (req, res)=>{
     }); 
   }
 }
+
+// exports.logOut =  function (req, res, next) {
+//   req.logout(function(err) {
+//    if (err) { return next(err)}
+//    res.json({message:'Logged out'})
+//  });}
